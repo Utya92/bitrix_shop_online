@@ -1,3 +1,6 @@
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+
+
 <footer class="footer">
     <div class="container footer__container">
         <div class="footer__col">
@@ -94,7 +97,6 @@
         </div>
     </div>
 </footer>
-<script src="assets/scripts/app.min.js"></script>
 </body>
 
 </html>

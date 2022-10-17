@@ -1,6 +1,14 @@
+<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
+
+<?php
+
+use Bitrix\Main\Page\Asset;
+
+Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . "/assets/styles/app.min.css");
+Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . "/assets/scripts/app.min.js");
+Asset::getInstance()->addString('<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=latin,cyrillic" rel="stylesheet">'); ?>
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,14 +24,17 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="application-name" content="">
     <meta name="msapplication-tooltip" content="">
-    <title>LASSIE - главная</title>
+    <title><?php $APPLICATION->ShowTitle(); ?></title>
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=latin,cyrillic" rel="stylesheet">
-    <link href="assets/styles/app.min.css" rel="stylesheet">
+    <?php
+    $APPLICATION->ShowHead();
+    ?>
 </head>
-
 <body>
+<?php
+$APPLICATION->ShowPanel();
+?>
 <header class="header">
     <div class="header__top">
         <div class="container header__container header__container_top">
@@ -51,7 +62,7 @@
         <div class="container header__container header__container_middle">
             <div class="header__col header__col_logo">
                 <a href="javascript:void(0);" class="header__logo logo">
-                    <img src="assets/images/logo.png" class="logo__img" alt="">
+                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/logo.png" ?>" class="logo__img" alt="">
                 </a>
             </div>
             <div class="header__contacts"><span class="header__icon icon-comment"></span>
@@ -85,7 +96,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu__content">
                                 <div class="dropdown-menu__img">
-                                    <img src="assets/images/header-submenu-1.jpg" alt="девочка">
+                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
+                                         alt="девочка">
                                 </div>
                                 <div class="dropdown-menu__menu-col">
                                     <ul class="vertical-menu">
@@ -127,7 +139,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu__content">
                                 <div class="dropdown-menu__img">
-                                    <img src="assets/images/header-submenu-1.jpg" alt="девочка">
+                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
+                                         alt="девочка">
                                 </div>
                                 <div class="dropdown-menu__menu-col">
                                     <ul class="vertical-menu">
@@ -169,7 +182,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu__content">
                                 <div class="dropdown-menu__img">
-                                    <img src="assets/images/header-submenu-1.jpg" alt="девочка">
+                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
+                                         alt="девочка">
                                 </div>
                                 <div class="dropdown-menu__menu-col">
                                     <ul class="vertical-menu">
@@ -211,7 +225,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu__content">
                                 <div class="dropdown-menu__img">
-                                    <img src="assets/images/header-submenu-1.jpg" alt="девочка">
+                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
+                                         alt="девочка">
                                 </div>
                                 <div class="dropdown-menu__menu-col">
                                     <ul class="vertical-menu">
@@ -300,7 +315,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu__content">
                                 <div class="dropdown-menu__img">
-                                    <img src="assets/images/header-submenu-1.jpg" alt="девочка">
+                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
+                                         alt="девочка">
                                 </div>
                                 <div class="dropdown-menu__menu-col">
                                     <ul class="vertical-menu">
@@ -342,7 +358,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu__content">
                                 <div class="dropdown-menu__img">
-                                    <img src="assets/images/header-submenu-1.jpg" alt="девочка">
+                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
+                                         alt="девочка">
                                 </div>
                                 <div class="dropdown-menu__menu-col">
                                     <ul class="vertical-menu">
@@ -384,7 +401,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu__content">
                                 <div class="dropdown-menu__img">
-                                    <img src="assets/images/header-submenu-1.jpg" alt="девочка">
+                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
+                                         alt="девочка">
                                 </div>
                                 <div class="dropdown-menu__menu-col">
                                     <ul class="vertical-menu">
@@ -473,7 +491,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu__content">
                                 <div class="dropdown-menu__img">
-                                    <img src="assets/images/header-submenu-1.jpg" alt="девочка">
+                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
+                                         alt="девочка">
                                 </div>
                                 <div class="dropdown-menu__menu-col">
                                     <ul class="vertical-menu">
@@ -516,7 +535,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-menu__content">
                                 <div class="dropdown-menu__img">
-                                    <img src="assets/images/header-submenu-1.jpg" alt="девочка">
+                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
+                                         alt="девочка">
                                 </div>
                                 <div class="dropdown-menu__menu-col">
                                     <ul class="vertical-menu">
@@ -602,13 +622,13 @@
     <div class="index__slider slider">
         <ul class="slider__container">
             <li class="slider__item">
-                <img src="assets/images/slider-1.jpg" alt="" class="slider__img">
+                <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/slider-1.jpg" ?>" alt="" class="slider__img">
                 <div class="index__slider-title">Встречаем осень
                     <br>с новой коллекцией
                 </div>
             </li>
             <li class="slider__item">
-                <img src="assets/images/slider-1.jpg" alt="" class="slider__img">
+                <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/slider-1.jpg" ?>" alt="" class="slider__img">
                 <div class="index__slider-title">Встречаем осень
                     <br>с новой коллекцией
                 </div>
