@@ -38,23 +38,78 @@ $APPLICATION->ShowPanel();
 <header class="header">
     <div class="header__top">
         <div class="container header__container header__container_top">
-            <div class="header__col header__col_top-left"><span class="header__icon icon-mail"></span><a
-                        href="javascript:void(0);" class="link">Подписаться</a>
+            <div class="header__col header__col_top-left">
+                <!--subscribe-->
+                <? $APPLICATION->IncludeComponent(
+                    "bitrix:main.include",
+                    "",
+                    array(
+                        "AREA_FILE_SHOW" => "file",
+                        "PATH" => SITE_DIR . "/local/templates/my_lassie_shop/include_areas/subscribe.php"
+                    ),
+                    false
+                ); ?>
+                <!--subscribe-->
             </div>
             <div class="header__col header__col_top-right">
-                <ul class="header__top-menu menu">
-                    <li class="menu__item"><a href="javascript:void(0);" class="link menu__name">О компании</a>
-                    </li>
-                    <li class="menu__item"><a href="javascript:void(0);" class="link menu__name">Оплата</a>
-                    </li>
-                    <li class="menu__item"><a href="javascript:void(0);" class="link menu__name">Доставка</a>
-                    </li>
-                </ul>
-                <form class="header__search search">
-                    <input name="search" type="search" placeholder="Поиск по каталогу" class="search__input">
-                    <button type="submit" class="search__btn"><span class="search__btn-icon icon-search"></span>
-                    </button>
-                </form>
+                <!--                <ul class="header__top-menu menu">-->
+                <!--                    <li class="menu__item"><a href="javascript:void(0);" class="link menu__name">О компании</a>-->
+                <!--                    </li>-->
+                <!--                    <li class="menu__item"><a href="javascript:void(0);" class="link menu__name">Оплата</a>-->
+                <!--                    </li>-->
+                <!--                    <li class="menu__item"><a href="javascript:void(0);" class="link menu__name">Доставка</a>-->
+                <!--                    </li>-->
+                <!--                </ul>-->
+                <? $APPLICATION->IncludeComponent(
+                    "bitrix:menu",
+                    "top_right",
+                    array(
+                        "ROOT_MENU_TYPE" => "top_right",
+                        "MAX_LEVEL" => "1",
+                        "CHILD_MENU_TYPE" => "top",
+                        "USE_EXT" => "Y",
+                        "DELAY" => "N",
+                        "ALLOW_MULTI_SELECT" => "Y",
+                        "MENU_CACHE_TYPE" => "N",
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "MENU_CACHE_GET_VARS" => array(),
+                        "COMPONENT_TEMPLATE" => "top_right"
+                    ),
+                    false
+                ); ?>
+
+                <!--                SEARCH-->
+                <? $APPLICATION->IncludeComponent("bitrix:search.title", "lassie_search",
+                    array(
+                        "NUM_CATEGORIES" => "1",    // Количество категорий поиска
+                        "TOP_COUNT" => "5",    // Количество результатов в каждой категории
+                        "CHECK_DATES" => "N",    // Искать только в активных по дате документах
+                        "SHOW_OTHERS" => "N",    // Показывать категорию "прочее"
+                        "PAGE" => "СТРАНИЦА КАТАЛОГА",    // Страница выдачи результатов поиска (доступен макрос #SITE_DIR#)
+                        "CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS"),    // Название категории
+                        "CATEGORY_0" => array(    // Ограничение области поиска
+                            0 => "iblock_catalog",
+                        ),
+                        "CATEGORY_0_iblock_catalog" => array(    // Искать в информационных блоках типа "iblock_catalog"
+                            0 => "all",
+                        ),
+                        "CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
+                        "SHOW_INPUT" => "Y",    // Показывать форму ввода поискового запроса
+                        "INPUT_ID" => "title-search-input",    // ID строки ввода поискового запроса
+                        "CONTAINER_ID" => "search",    // ID контейнера, по ширине которого будут выводиться результаты
+                        "PRICE_CODE" => array(    // Тип цены
+                            0 => "BASE",
+                        ),
+                        "SHOW_PREVIEW" => "Y",    // Показать картинку
+                        "PREVIEW_WIDTH" => "75",    // Ширина картинки
+                        "PREVIEW_HEIGHT" => "75",    // Высота картинки
+                        "CONVERT_CURRENCY" => "Y",    // Показывать цены в одной валюте
+                    ), false
+                ); ?>
+                <!--                SEARCH-->
+
+
             </div>
         </div>
     </div>
@@ -62,579 +117,149 @@ $APPLICATION->ShowPanel();
         <div class="container header__container header__container_middle">
             <div class="header__col header__col_logo">
                 <a href="javascript:void(0);" class="header__logo logo">
-                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/logo.png" ?>" class="logo__img" alt="">
+                    <? $APPLICATION->IncludeComponent(
+                        "bitrix:main.include",
+                        "",
+                        array(
+                            "AREA_FILE_SHOW" => "file",
+                            "PATH" => SITE_DIR . "/local/templates/my_lassie_shop/include_areas/logo.php"
+                        ),
+                        false
+                    ); ?>
                 </a>
             </div>
             <div class="header__contacts"><span class="header__icon icon-comment"></span>
                 <div class="header__col header__col_contacts">
-                    <div class="contacts"><a href="tel:+74952150435" class="contacts__tel">8 495 215-04-35</a>
-                        <div class="contacts__info">с 9:00 до 24:00 ежедневно</div>
+                    <div class="contacts"><a href="tel:+74952150435" class="contacts__tel">
+                            <? $APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "",
+                                array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "PATH" => SITE_DIR . "/local/templates/my_lassie_shop/include_areas/phone_1.php"
+                                ),
+                                false
+                            ); ?>
+                        </a>
+                        <div class="contacts__info"> <? $APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "",
+                                array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "PATH" => SITE_DIR . "/local/templates/my_lassie_shop/include_areas/work_time_1.php"
+                                ),
+                                false
+                            ); ?></div>
                     </div>
                 </div>
                 <div class="header__col header__col_contacts">
-                    <div class="contacts"><a href="tel:+78003331204" class="contacts__tel">8 800 333-12-04</a>
-                        <div class="contacts__info">24 часа 7 дней в неделю</div>
+                    <div class="contacts"><a href="tel:+78003331204" class="contacts__tel">
+                            <? $APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "",
+                                array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "PATH" => SITE_DIR . "/local/templates/my_lassie_shop/include_areas/phone_2.php"
+                                ),
+                                false
+                            ); ?>
+                        </a>
+                        <div class="contacts__info">
+                            <? $APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "",
+                                array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "PATH" => SITE_DIR . "/local/templates/my_lassie_shop/include_areas/work_time_2.php"
+                                ),
+                                false
+                            ); ?>
+                        </div>
                     </div>
                 </div>
                 <div class="header__col header__col_contacts"><a href="javascript:void(0);" class="link">Контактная
                         информация</a>
                 </div>
             </div>
-            <div class="header__col header__col_basket"><span class="header__icon icon-bag"></span>
-                <div class="header__basket">
-                    <div class="text">В вашей корзине</div>
-                    <a href="javascript:void(0);" class="link">4 товара на 25 196 руб.</a>
-                </div>
-            </div>
+
+            <!--            BASKET-->
+
+            <? $APPLICATION->IncludeComponent(
+                "bitrix:sale.basket.basket.line",
+                "lassie_basket",
+                array(
+                    "PATH_TO_BASKET" => SITE_DIR . "personal/cart/",	// Страница корзины
+                    "PATH_TO_PERSONAL" => SITE_DIR . "personal/",	// Страница персонального раздела
+                    "SHOW_PERSONAL_LINK" => "N",	// Отображать персональный раздел
+                    "SHOW_NUM_PRODUCTS" => "Y",	// Показывать количество товаров
+                    "SHOW_TOTAL_PRICE" => "Y",	// Показывать общую сумму по товарам
+                    "SHOW_PRODUCTS" => "N",	// Показывать список товаров
+                    "POSITION_FIXED" => "N",	// Отображать корзину поверх шаблона
+                    "SHOW_AUTHOR" => "Y",	// Добавить возможность авторизации
+                    "PATH_TO_REGISTER" => SITE_DIR . "login/",	// Страница регистрации
+                    "PATH_TO_PROFILE" => SITE_DIR . "personal/",	// Страница профиля
+                ),
+                false
+            ); ?>
+            <!--            BASKET-->
         </div>
     </div>
     <div class="header__bottom">
         <div class="container">
+
+
+            <!--            Навигация main меню-->
             <nav class="header__nav navigation">
-                <ul class="header__menu menu menu_width_full">
-                    <li class="menu__item"><a href="#" class="menu__name">Коллекции</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu__content">
-                                <div class="dropdown-menu__img">
-                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
-                                         alt="девочка">
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><span class="vertical-menu__name">Варежки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Для
-                                                        новорождённых</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Горловина и
-                                                шарфы</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Носки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Перчатки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Зимние</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu__item"><a href="javascript:void(0);" class="menu__name">Верхняя одежда</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu__content">
-                                <div class="dropdown-menu__img">
-                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
-                                         alt="девочка">
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><span class="vertical-menu__name">Варежки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Для
-                                                        новорождённых</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Горловина и
-                                                шарфы</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Носки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Перчатки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Зимние</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu__item"><a href="javascript:void(0);" class="menu__name">Игра слоями</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu__content">
-                                <div class="dropdown-menu__img">
-                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
-                                         alt="девочка">
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><span class="vertical-menu__name">Варежки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Для
-                                                        новорождённых</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Горловина и
-                                                шарфы</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Носки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Перчатки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Зимние</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu__item"><a href="javascript:void(0);" class="menu__name">Для прогулки и спорта</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu__content">
-                                <div class="dropdown-menu__img">
-                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
-                                         alt="девочка">
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><span class="vertical-menu__name">Варежки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Для
-                                                        новорождённых</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Горловина и
-                                                шарфы</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Носки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Перчатки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Зимние</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Сумки и
-                                                рюкзаки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Солнцезащитные
-                                                очки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Головные уборы</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Шапка-шлем</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Шапка-бини</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Повязка
-                                                        на голову</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Вязаные
-                                                        шапки</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Шапки
-                                                        с козырьком</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Непромокаемые
-                                                        шапки</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Шапка
-                                                        на завязках</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Шапка
-                                                        с помпоном </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu__item"><a href="javascript:void(0);" class="menu__name">Летняя одежда</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu__content">
-                                <div class="dropdown-menu__img">
-                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
-                                         alt="девочка">
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><span class="vertical-menu__name">Варежки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Для
-                                                        новорождённых</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Горловина и
-                                                шарфы</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Носки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Перчатки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Зимние</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu__item"><a href="javascript:void(0);" class="menu__name">Обувь</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu__content">
-                                <div class="dropdown-menu__img">
-                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
-                                         alt="девочка">
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><span class="vertical-menu__name">Варежки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Для
-                                                        новорождённых</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Горловина и
-                                                шарфы</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Носки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Перчатки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Зимние</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu__item"><a href="javascript:void(0);" class="menu__name">Аксессуары</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu__content">
-                                <div class="dropdown-menu__img">
-                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
-                                         alt="девочка">
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><span class="vertical-menu__name">Варежки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Для
-                                                        новорождённых</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Горловина и
-                                                шарфы</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Носки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Перчатки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Зимние</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Сумки и
-                                                рюкзаки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Солнцезащитные
-                                                очки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Головные уборы</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Шапка-шлем</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Шапка-бини</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Повязка
-                                                        на голову</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Вязаные
-                                                        шапки</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Шапки
-                                                        с козырьком</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Непромокаемые
-                                                        шапки</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Шапка
-                                                        на завязках</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Шапка
-                                                        с помпоном </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu__item"><a href="javascript:void(0);" class="menu__name">Для новорожденных</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu__content">
-                                <div class="dropdown-menu__img">
-                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
-                                         alt="девочка">
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><span class="vertical-menu__name">Варежки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Для
-                                                        новорождённых</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Горловина и
-                                                шарфы</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Носки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Перчатки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Зимние</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="header menu__item"><a href="javascript:void(0);" class="header__sale-wrapper menu__name"><span
-                                    class="header__sale">Распродажа</span></a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu__content">
-                                <div class="dropdown-menu__img">
-                                    <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/header-submenu-1.jpg" ?>"
-                                         alt="девочка">
-                                </div>
-                                <div class="dropdown-menu__menu-col">
-                                    <ul class="vertical-menu">
-                                        <li class="vertical-menu__item"><span class="vertical-menu__name">Варежки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Для
-                                                        новорождённых</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Горловина и
-                                                шарфы</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><a href="javascript:void(0);"
-                                                                           class="vertical-menu__name">Носки</a>
-                                        </li>
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name">Перчатки</span>
-                                            <ul class="vertical-menu__submenu">
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Демисезонные</a>
-                                                </li>
-                                                <li class="vertical-menu__submenu-item"><a href="javascript:void(0);"
-                                                                                           class="link vertical-menu__submenu-name">Зимние</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <button class="burger-btn header__nav-btn js-nav-btn"><span
-                            class="burger-btn__switch">Развернуть меню </span>
-                </button>
-                <div class="navigation__collapse">
-                    <ul class="navigation__collapse-menu vertical-menu">
-                        <li class="navigation__collapse-item vertical-menu__item"><a href="javascript:void(0);"
-                                                                                     class="vertical-menu__name">Распродажа</a>
-                        </li>
-                        <li class="navigation__collapse-item vertical-menu__item"><a href="javascript:void(0);"
-                                                                                     class="vertical-menu__name">Для
-                                новорожденных</a>
-                        </li>
-                        <li class="navigation__collapse-item vertical-menu__item"><a href="javascript:void(0);"
-                                                                                     class="vertical-menu__name">Аксессуары</a>
-                        </li>
-                        <li class="navigation__collapse-item vertical-menu__item"><a href="javascript:void(0);"
-                                                                                     class="vertical-menu__name">Обувь</a>
-                        </li>
-                        <li class="navigation__collapse-item vertical-menu__item"><a href="javascript:void(0);"
-                                                                                     class="vertical-menu__name">Летняя
-                                одежда</a>
-                        </li>
-                        <li class="navigation__collapse-item vertical-menu__item"><a href="javascript:void(0);"
-                                                                                     class="vertical-menu__name">Для
-                                прогулки и спорта</a>
-                        </li>
-                        <li class="navigation__collapse-item vertical-menu__item"><a href="javascript:void(0);"
-                                                                                     class="vertical-menu__name">Игра
-                                слоями</a>
-                        </li>
-                        <li class="navigation__collapse-item vertical-menu__item"><a href="javascript:void(0);"
-                                                                                     class="vertical-menu__name">Верхняя
-                                одежда</a>
-                        </li>
-                        <li class="navigation__collapse-item vertical-menu__item"><a href="javascript:void(0);"
-                                                                                     class="vertical-menu__name">Коллекции</a>
-                        </li>
-                    </ul>
-                </div>
+                <p>
+
+                    <? $APPLICATION->IncludeComponent(
+                        "bitrix:menu",
+                        "main_top_menu",
+                        array(
+                            "ROOT_MENU_TYPE" => "top",
+                            "MENU_CACHE_TYPE" => "N",
+                            "MENU_CACHE_TIME" => "36000000",
+                            "MENU_CACHE_USE_GROUPS" => "Y",
+                            "CACHE_SELECTED_ITEMS" => "N",
+                            "MENU_CACHE_GET_VARS" => array(),
+                            "MAX_LEVEL" => "3",
+                            "CHILD_MENU_TYPE" => "",
+                            "USE_EXT" => "N",
+                            "DELAY" => "N",
+                            "ALLOW_MULTI_SELECT" => "N",
+                            "COMPONENT_TEMPLATE" => "",
+                            "MENU_THEME" => "blue"
+                        ),
+                        false
+                    ); ?>
             </nav>
+            <!--            НАВИГАЦИЯ main меню -->
         </div>
     </div>
 </header>
-<main class="content index">
-    <div class="index__slider slider">
-        <ul class="slider__container">
-            <li class="slider__item">
-                <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/slider-1.jpg" ?>" alt="" class="slider__img">
-                <div class="index__slider-title">Встречаем осень
-                    <br>с новой коллекцией
-                </div>
-            </li>
-            <li class="slider__item">
-                <img src="<?= SITE_TEMPLATE_PATH . "/assets/images/slider-1.jpg" ?>" alt="" class="slider__img">
-                <div class="index__slider-title">Встречаем осень
-                    <br>с новой коллекцией
-                </div>
-            </li>
-        </ul>
-    </div>
-    <section class="popular">
-        <div class="container">
-            <h1 class="heading"><span class="heading__text">Популярные товары</span></h1>
+
+
+<!--            Слайдер-->
+    <!--    <div class="index__slider slider">-->
+    <!--        <ul class="slider__container">-->
+    <!--            <li class="slider__item">-->
+    <!--                <img src="-->
+    <? //= SITE_TEMPLATE_PATH . "/assets/images/slider-1.jpg" ?><!--" alt="" class="slider__img">-->
+    <!--                <div class="index__slider-title">Встречаем осень-->
+    <!--                    <br>с новой коллекцией-->
+    <!--                </div>-->
+    <!--            </li>-->
+    <!--            <li class="slider__item">-->
+    <!--                <img src="-->
+    <? //= SITE_TEMPLATE_PATH . "/assets/images/slider-1.jpg" ?><!--" alt="" class="slider__img">-->
+    <!--                <div class="index__slider-title">Встречаем осень-->
+    <!--                    <br>с новой коллекцией-->
+    <!--                </div>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+    <!--            Слайдер-->
+
+<!--    <section class="popular">-->
+<!--        <div class="container">-->
+<!--            <h1 class="heading"><span class="heading__text">Популярные товары</span></h1>-->

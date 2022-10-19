@@ -1,45 +1,45 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Новости",
-		"news/",
+		"О компании lassie",
+		"",
 		Array(),
 		Array(),
 		""
 	),
 
 	Array(
-		"Как купить",
-		"about/howto/",
+		"История",
+		"",
 		Array(), 
 		Array(), 
 		"" 
 	),
 
 	Array(
-		"Доставка",
-		"about/delivery/",
+		"Качество",
+		"",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"О магазине",
-		"about/",
+		"Уход за вещами",
+		"",
 		Array(),
 		Array(),
 		""
 	),
 	Array(
-		"Гарантия",
-		"about/guaranty/",
+		"Категории Lassie®",
+		"",
 		Array(),
 		Array(),
 		""
 	),
 	Array(
-		"Контакты",
-		"about/contacts/",
+		"Символы Lassie®",
+		"",
 		Array(),
 		Array(),
 		""
