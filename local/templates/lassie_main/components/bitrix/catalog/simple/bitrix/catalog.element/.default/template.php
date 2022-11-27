@@ -3,7 +3,7 @@ $this->setFrameMode(true);
 ?>
 
 
-<?php //debug($arResult );?>
+<?php //debug($arResult["DETAIL_PICTURE"] );?>
 
 <div class="card product-page__card">
     <div class="card__top">
@@ -12,6 +12,7 @@ $this->setFrameMode(true);
 
             <!-- 	детальная картинка -->
             <div class="gallery__display">
+
                 <img src="<?= $arResult["DETAIL_PICTURE"]["SRC"] ?>" alt="<?= $arResult["NAME"] ?>"
                      title="<?= $arResult["NAME"] ?>" alt="детальная картинка"
                      class="gallery__display-img">
@@ -24,11 +25,9 @@ $this->setFrameMode(true);
                 <ul class="gallery__thumbnails">
                     <? if (!empty($arResult["MORE_PHOTO"])): ?>
                         <? foreach ($arResult["MORE_PHOTO"] as $PHOTO): ?>
-
                             <li class="gallery__thumbnails-item gallery__thumbnails-item_active">
                                 <img class="gallery__thumbnails-img" src="<?= $PHOTO["SRC"] ?>"
                                      alt="<?= $arResult["NAME"] ?>"/>
-                                </a>
                             </li>
                         <? endforeach ?>
                     <? endif ?>
@@ -126,13 +125,13 @@ $this->setFrameMode(true);
                     </div>
                     <a href="javascript:void(0);" class="link text">Сообщить о поступлении размера</a>
                 </div>
+
+
+                <!--                        Количество-->
+
                 <div class="card__content-block card__content-block_margin_30">
                     <div class="card__subtitle text">Количество:</div>
                     <div class="card__content-row">
-
-
-
-<!--                        Количество-->
                         <div class="card__number input-number">
                             <input id="card-num" name="Card[number]" type="number" step="1" min="1" required
                                    class="input-number__elem">
@@ -141,8 +140,7 @@ $this->setFrameMode(true);
                                         class="input-number__counter-spin input-number__counter-spin_less">Меньше</span>
                             </div>
                         </div>
-
-<!--                        /Количество-->
+                        <!--                        /Количество-->
 
 
 
@@ -153,7 +151,8 @@ $this->setFrameMode(true);
 
                 <!--                Кнопка добавить в корзину-->
 
-                <button type="submit" data-popup="good" class="btn form__btn js-popup-open"><?echo GetMessage("CATALOG_ADD_TO_BASKET")?>
+                <button type="submit" data-popup="good"
+                        class="btn form__btn js-popup-open"><? echo GetMessage("CATALOG_ADD_TO_BASKET") ?>
                 </button>
                 <!--               / Кнопка добавить в корзину-->
 
